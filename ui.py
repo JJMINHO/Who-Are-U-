@@ -16,7 +16,7 @@ except FileNotFoundError:
     class_names = [f"Pokemon_{i}" for i in range(150)]
 
 
-# 모델 로드 함수 (캐싱 적용 및 자동 아키텍처 인식)
+# 모델 로드 함수 
 @st.cache_resource
 def load_model():
     num_classes = len(class_names)
@@ -94,11 +94,10 @@ if uploaded_file is not None:
         st.write(f"{i + 1}. **{pokemon_name}** ({prob:.2f}%)")
 
 
-# 모델별 성능 및 추론 능력 비교표 (UI 하단)
+# 모델별 성능 및 추론 능력 비교표 
 st.markdown("---")
 st.subheader("모델별 성능 및 추론 능력 비교")
 
-# 주의: Accuracy, Precision, Recall, F1 값은 터미널에 출력된 실제 결과값으로 수정해 주세요!
 data = {
     "실험 (모델 설정)": [
         "A. ResNet18 (Feature Extraction)",
