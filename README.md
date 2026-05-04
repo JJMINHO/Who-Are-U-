@@ -29,16 +29,31 @@
 | D | ResNet18 (From Scratch) | 0.2302 | 0.2474 | 0.2366 | 0.1887 |
 
 
----
 
+
+---
 ## 데모 GUI (Streamlit Application)
 사용자가 직접 포켓몬 이미지를 업로드하고 결과를 확인할 수 있는 인터랙티브 웹 데모를 구현했습니다. 
-가장 성능이 높았던 모델(`best_pokemon_model.pt`)의 아키텍처를 자동으로 인식하여 가중치를 로드하며, 상위 5개(Top-5)의 예측 확률을 제공합니다.
+학습 결과 가장 높은 성능을 기록한 **최종 채택 모델(`best_pokemon_model.pt`)**의 아키텍처를 자동으로 인식하여 가중치를 로드하며, 분석 결과로 상위 5개(Top-5)의 예측 확률(Probability)을 제공합니다.
 
-### 스크린샷 및 시연 영상
-![Demo Screenshot](<여기에_이미지_경로_또는_URL_삽입>)
+---
 
+### 추론 예시
 
+#### 분류 성공 케이스
+학습 데이터셋(150종)에 존재하는 포켓몬을 입력했을 때의 결과입니다. 
+모델이 포켓몬의 시각적 특징을 정확하게 추출하여 높은 확률로 성공적인 분류를 수행했습니다.
+
+<img width="600" alt="Success Case" src="https://github.com/user-attachments/assets/0c8bbc31-da3b-428b-a935-05f6528e26e7" />
+
+<br>
+
+#### 오분류 케이스
+학습 데이터셋에 포함되지 않은 미학습 포켓몬을 입력한 경우입니다.
+모델이 예측할 수 없는 새로운 범주(Out-of-Distribution)의 데이터가 들어왔기 때문에, 
+모델의 한계로 인해 분류에 실패한 모습을 보여줍니다.
+
+<img width="600" alt="Failure Case" src="https://github.com/user-attachments/assets/2b03fa7e-f1f4-43fc-9d15-6fc8e1bd5ecc" />
 ---
 
 ## 실행 방법 
