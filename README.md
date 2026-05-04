@@ -32,8 +32,16 @@ ResNet 대비 파라미터 수가 약 1/7로 매우 적은 경량화 모델을 �
 | C | MobileNet V3 (Fine-Tuning) | 0.8695 | 0.8912 | 0.8698 | 0.8634 |
 | D | ResNet18 (From Scratch) | 0.2302 | 0.2474 | 0.2366 | 0.1887 |
 
+### Learning Curve
+모델 학습 과정에서 Epoch에 따른 Loss의 감소와 Accuracy의 증가 추이입니다.
 
+<img width="1507" height="669" alt="Image" src="https://github.com/user-attachments/assets/2e33b7c7-f3bc-4df9-babe-38a08ef151ed" />
 
+**분석 요약:**
+* **전이 학습(Transfer Learning)의 우수성:** 
+사전 학습된 가중치를 사용한 모델 A, B, C는 초기 Epoch부터 빠르게 높은 정확도에 도달했습니다.
+* **From Scratch 모델의 한계:** 
+아무런 사전 정보 없이 학습을 시작한 모델 D는 동일한 Epoch 내에서 학습 속도가 매우 느리며 가장 낮은 성능을 기록했습니다.
 
 ---
 ## 데모 GUI (Streamlit Application)
