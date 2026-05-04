@@ -55,7 +55,6 @@ def evaluate_model(model, dataloader, device):
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
 
-    # zero_division=0 은 분모가 0일 때 경고를 없애줍니다.
     precision, recall, f1, _ = precision_recall_fscore_support(all_labels, all_preds, average='macro', zero_division=0)
     acc = accuracy_score(all_labels, all_preds)
 
@@ -102,7 +101,7 @@ def train_and_compare():
         'D': 'ResNet18 (From Scratch)'
     }
     results = {}
-    num_epochs = 3  # 빠른 결과를 위해 3으로 설정. 시간 여유가 있다면 5나 10으로 올려보세요.
+    num_epochs = 3  # 빠른 결과를 위해 3으로 설정.
 
     print(f"\n3. 총 4가지 실험 자동 비교를 시작합니다. (Device: {device})")
     print("-" * 50)
@@ -144,7 +143,7 @@ def train_and_compare():
 
     # 최종 결과 출력
     print("\n" + "=" * 50)
-    print("🏆 [최종 실험 결과 요약] - README.md에 복사하세요!")
+    print("[최종 실험 결과]")
     print("=" * 50)
     print("| 실험 | 설정 (Backbone & 방식) | Accuracy | Precision | Recall | F1-Score |")
     print("|---|---|---|---|---|---|")
@@ -153,7 +152,7 @@ def train_and_compare():
         print(
             f"| {exp_type} | {desc} | {metrics['Accuracy']:.4f} | {metrics['Precision']:.4f} | {metrics['Recall']:.4f} | {metrics['F1-Score']:.4f} |")
     print("=" * 50)
-    print("✅ 최고 성능 모델이 'best_pokemon_model.pt'로 저장되었습니다.")
+    print(" 최고 성능 모델이 'best_pokemon_model.pt'로 저장되었습니다.")
 
 if __name__ == '__main__':
     train_and_compare()
