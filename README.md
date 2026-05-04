@@ -1,9 +1,9 @@
 # PokéVision: 150종 포켓몬 분류기 (Pokemon Classifier)
 
 ## 프로젝트 소개 (Project Overview)
-주어진 포켓몬 이미지의 픽셀 특징을 분석하여 150종의 포켓몬 중 어떤 포켓몬인지 정확한 이름을 예측하는 컴퓨터 비전 분류 애플리케이션입니다.
+주어진 포켓몬 이미지의 픽셀 특징을 분석하여 150종의 포켓몬 중 어떤 포켓몬인지 정확한 이름을 예측하는 컴퓨터 비전기반 분류기입니다.
 
-딥러닝 프레임워크(PyTorch)와 사전 학습된(Pre-trained) CNN Backbone 모델을 활용한 **Transfer Learning** 기술을 적용했습니다. 이를 통해 처음부터 모델을 학습(From Scratch)하는 것보다 훨씬 적은 컴퓨팅 자원과 시간으로 높은 분류 정확도를 제공합니다.
+PyTorch와 사전 Pre-trained CNN Backbone 모델을 활용한 **Transfer Learning** 기술을 적용했습니다. 이를 통해 처음부터 모델을 학습하는 것보다 훨씬 적은 컴퓨팅 자원과 시간으로 높은 분류 정확도를 제공합니다.
 
 * **데이터셋 (Dataset):** Kaggle 7,000 Labeled Pokemon (Total 150 Classes)
 * **개발 환경:** Python 3.13, PyTorch, Streamlit, macOS (Apple Silicon M1 Pro / MPS Acceleration 지원)
@@ -14,11 +14,11 @@
 본 프로젝트는 모델의 아키텍처와 전이 학습(Fine-tuning) 범위를 변수로 설정하여 총 4가지의 독립적인 실험을 진행했습니다.
 
 1. **[실험 A] ResNet18 (Feature Extraction):**
-ImageNet 데이터로 사전 학습된 가중치를 동결(Freeze)하고, 마지막 분류기(FC layer)만 150개 클래스에 맞게 학습했습니다.
+ImageNet 데이터로 사전 학습된 가중치를 동결하고, 마지막 분류기(FC layer)만 150개 클래스에 맞게 학습했습니다.
 3. **[실험 B] ResNet18 (Fine-Tuning):** 
-사전 학습된 가중치를 초기값으로 사용하되, 전체 네트워크의 가중치를 포켓몬 데이터에 맞게 미세 조정(Fine-tuning)했습니다.
+사전 학습된 가중치를 초기값으로 사용하되, 전체 네트워크의 가중치를 포켓몬 데이터에 맞게 Fine-tuning했습니다.
 4. **[실험 C] MobileNet V3 Small (Fine-Tuning):** 
-ResNet 대비 파라미터 수가 약 1/7로 매우 적은 경량화 모델을 사용하여 파인튜닝을 진행했습니다.
+ResNet 대비 파라미터 수가 약 1/7로 매우 적은 경량화 모델을 사용하여 Fine-Tuning을 진행했습니다.
 5. **[실험 D] ResNet18 (From Scratch):** 
 사전 학습 가중치를 전혀 사용하지 않고 무작위 초기화 상태에서 학습하여, 전이 학습의 효과를 대조군으로서 검증했습니다.
 
@@ -46,7 +46,7 @@ ResNet 대비 파라미터 수가 약 1/7로 매우 적은 경량화 모델을 �
 ---
 ## 데모 GUI (Streamlit Application)
 사용자가 직접 포켓몬 이미지를 업로드하고 결과를 확인할 수 있는 인터랙티브 웹 데모를 구현했습니다. 
-학습 결과 가장 높은 성능을 기록한 **최종 채택 모델(`best_pokemon_model.pt`)**의 아키텍처를 자동으로 인식하여 가중치를 로드하며, 분석 결과로 상위 5개(Top-5)의 예측 확률(Probability)을 제공합니다.
+학습 결과 가장 높은 성능을 기록한 **최종 채택 모델(`best_pokemon_model.pt`)**의 아키텍처를 자동으로 인식하여 가중치를 로드하며, 분석 결과로 상위 5개의 예측 확률을 제공합니다.
 
 ---
 
@@ -62,14 +62,30 @@ ResNet 대비 파라미터 수가 약 1/7로 매우 적은 경량화 모델을 �
 
 #### 오분류 케이스
 학습 데이터셋에 포함되지 않은 미학습 포켓몬을 입력한 경우입니다.
-모델이 예측할 수 없는 새로운 범주(Out-of-Distribution)의 데이터가 들어왔기 때문에, 
-모델의 한계로 인해 분류에 실패한 모습을 보여줍니다.
+모델이 예측할 수 없는 새로운 범주의 데이터가 들어왔기 때문에, 모델의 한계로 인해 분류에 실패한 모습을 보여줍니다.
 
 <img width="600" alt="Failure Case" src="https://github.com/user-attachments/assets/2b03fa7e-f1f4-43fc-9d15-6fc8e1bd5ecc" />
 ---
 
 ## 실행 방법 
 
-**1. 패키지 설치**
+프로젝트를 복제한 후, 아래 단계를 순서대로 진행하여 모델 학습 및 데모 앱을 실행할 수 있습니다.
+
+### **1. 필수 패키지 설치**
+프로젝트 구동에 필요한 라이브러리를 설치합니다.
 ```bash
-pip install torch torchvision streamlit pandas scikit-learn kagglehub Pillow
+pip install torch torchvision streamlit pandas scikit-learn kagglehub Pillow matplotlib
+```
+
+### **2. 모델 학습 및 성능 평가**
+모델 학습을 실행
+```bash
+python training.py
+```
+
+### **3. 데모 웹 앱 실행**
+```bash
+streamlit run ui.py
+```
+
+*위 실행 방법은 사용자의 환경에 따라 달라질 수 있습니다.
