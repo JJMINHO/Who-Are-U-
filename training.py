@@ -40,7 +40,7 @@ def get_model(experiment_type, num_classes=150):
     return model
 
 
-# 2. 모델 검증 함수 (Precision, Recall, F1 계산)
+# 모델 검증 함수 (Precision, Recall, F1 계산)
 def evaluate_model(model, dataloader, device):
     model.eval()
     all_preds = []
@@ -61,7 +61,7 @@ def evaluate_model(model, dataloader, device):
 
     return acc, precision, recall, f1
 
-# 3. Learning 및 비교 루프
+# Learning 및 비교 루프
 def train_and_compare():
     print("1. Kaggle 데이터셋 다운로드 중...")
     dataset_path = kagglehub.dataset_download("lantian773030/pokemonclassification")
