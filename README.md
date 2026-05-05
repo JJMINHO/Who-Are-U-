@@ -6,7 +6,6 @@
 PyTorch와 사전 Pre-trained CNN Backbone 모델을 활용한 **Transfer Learning** 기술을 적용했습니다. 이를 통해 처음부터 모델을 학습하는 것보다 훨씬 적은 컴퓨팅 자원과 시간으로 높은 분류 정확도를 제공합니다.
 
 * **데이터셋 (Dataset):** Kaggle 7,000 Labeled Pokemon (Total 150 Classes)
-* **개발 환경:** Python 3.13, PyTorch, Streamlit, macOS (Apple Silicon M1 Pro / MPS Acceleration 지원)
 
 ---
 
