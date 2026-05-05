@@ -1,4 +1,4 @@
-# PokéVision: 150종 포켓몬 분류기 (Pokemon Classifier)
+# Who-Are-U: 150종 포켓몬 분류기 (Pokemon Classifier)
 
 ## 프로젝트 소개 (Project Overview)
 주어진 포켓몬 이미지의 픽셀 특징을 분석하여 150종의 포켓몬 중 어떤 포켓몬인지 정확한 이름을 예측하는 컴퓨터 비전기반 분류기입니다.
